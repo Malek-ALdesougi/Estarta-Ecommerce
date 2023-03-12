@@ -4,7 +4,7 @@ import * as AUTH_CONSTANTS from './constants'
 const initState = {
     isAuth: localStorage.getItem('Token'),
     loading: false,
-    user:localStorage.getItem('user'),
+    user: JSON.parse(localStorage.getItem('user')),
     error: null
 }
 

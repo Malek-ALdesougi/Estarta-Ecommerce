@@ -1,7 +1,7 @@
 import { Magic } from "magic-sdk";
 
 
-const magic = new Magic('pk_live_987CA4C849D0D178');
+const magic = new Magic("pk_live_9A92692F86505B4E");
 
 
 export default magic ;
