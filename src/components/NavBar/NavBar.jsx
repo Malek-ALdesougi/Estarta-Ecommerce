@@ -15,8 +15,8 @@ function NavBar() {
       </div>
 
       <div className="button">
-        {loading ? (
-          'loading...'
+        {isAuth ? (
+          ''
         ) : (
           <button onClick={() => navigate('/login')}>Login</button>
         )}

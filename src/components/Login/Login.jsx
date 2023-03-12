@@ -29,7 +29,7 @@ function Login() {
       </div>
 
       <div>
-        <button onClick={login}>Login</button>
+        <button disabled={isAuth} onClick={login}>Login</button>
       </div>
     </div>
   );

@@ -20,7 +20,7 @@ export function HandleLogin(email) {
                 localStorage.setItem('Token', Token);
                 dispatch({
                     type: AUTH_CONSTANTS.AUTH_SUCCESS,
-                    payload: user
+                    payload: {user, Token}
                 })
             }
         } catch (error) {

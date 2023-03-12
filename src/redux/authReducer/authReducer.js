@@ -2,7 +2,7 @@ import * as AUTH_CONSTANTS from './constants'
 
 
 const initState = {
-    isAuth: localStorage.getItem('Token'),
+    isAuth: !!localStorage.getItem('Token') || false,
     loading: false,
     user: JSON.parse(localStorage.getItem('user')),
     error: null
@@ -20,9 +20,9 @@ const authReducer = (state = initState, action) => {
         case AUTH_CONSTANTS.AUTH_SUCCESS:
             return {
                 ...state,
-                isAuth: true,
+                isAuth: action.payload.Token,
                 loading: false,
-                user: action.payload
+                user: action.payload.user
             }
 
         case AUTH_CONSTANTS.AUTH_ERROR:
