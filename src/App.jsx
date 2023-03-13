@@ -7,6 +7,8 @@ import NavBar from './components/NavBar/NavBar';
 import { CircleLoader } from 'react-spinners';
 //redux
 import { useSelector } from 'react-redux';
+// auth checker component
+import Auth from './components/Auth';
 
 const Home = lazy(() => import('./pages/Home'));
 const LoginPage = lazy(() => import('./pages/LoginPage'));
@@ -16,10 +18,9 @@ const Products = lazy(() => import('./pages/Products'));
 function App() {
   const { loading } = useSelector((state) => state.authReducer);
 
-
   if (loading)
     return (
-      <div className='spinner-container'>
+      <div className="spinner-container">
         <CircleLoader color="#ff8500" loading={true} size={90} />;
         <h3>Loading ...</h3>
       </div>
@@ -28,15 +29,15 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <Suspense fallback={'Loading ...'}>
-          <NavBar />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="login" element={<LoginPage />} />
-            <Route path="cart" element={<Cart />} />
-            <Route path="products" element={<Products />} />
-          </Routes>
-        </Suspense>
+        <NavBar />
+          <Suspense fallback={'Loading ...'}>
+            <Routes>
+              <Route path="/" element={<Auth><Home /></Auth>} />
+              <Route path="login" element={<LoginPage />} />
+              <Route path="cart" element={<Auth><Cart /></Auth>} />
+              <Route path="products" element={<Auth><Products /></Auth>} />
+            </Routes>
+          </Suspense>
       </BrowserRouter>
     </div>
   );
