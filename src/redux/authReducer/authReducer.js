@@ -12,7 +12,7 @@ const authReducer = (state = initState, action) => {
 
     switch (action.type) {
 
-        case AUTH_CONSTANTS.LOGIN_START:
+        case AUTH_CONSTANTS.LOADING_START:
             return {
                 ...state,
                 loading: true
@@ -30,6 +30,14 @@ const authReducer = (state = initState, action) => {
                 ...state,
                 loading: false,
                 error: action.payload
+            }
+
+        case AUTH_CONSTANTS.LOGOUT_USER:
+            return {
+                isAuth: false,
+                loading: false,
+                user: {},
+                error: null
             }
         default:
             return state
