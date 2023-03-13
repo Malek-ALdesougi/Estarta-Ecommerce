@@ -2,7 +2,7 @@ import magic from "../../services/magic"
 import * as AUTH_CONSTANTS from './constants'
 
 export function HandleLogin(email) {
-
+    
     return async (dispatch) => {
 
         dispatch({
