@@ -81,16 +81,6 @@ button:focus-visible {
   height:100%;
 }
 
-.spinner-container{
-  height: inherit;
-  display: flex;
-  justify-content: center;
-  align-items:center;
-  flex-direction: column;
-}
 
-h3{
-  color: #d27410;
-  font-family:Verdana, Geneva, Tahoma, sans-serif;
-  
-}
+
+

@@ -39,6 +39,12 @@ const authReducer = (state = initState, action) => {
                 user: {},
                 error: null
             }
+        case AUTH_CONSTANTS.RESET_VALIDATE_ACTION:
+            return {
+                ...state,
+                loading: false,
+                isAuth: false,
+            }
         default:
             return state
 

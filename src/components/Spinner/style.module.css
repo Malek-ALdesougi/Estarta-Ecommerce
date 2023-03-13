@@ -1,0 +1,13 @@
+h3 {
+    color: #d27410;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.spinnerContainer{
+    height: inherit;
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    flex-direction: column;
+    height: 100vh;
+  }

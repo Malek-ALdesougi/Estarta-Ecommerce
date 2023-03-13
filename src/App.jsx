@@ -1,14 +1,23 @@
-import { lazy, Suspense } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { lazy, Suspense, useEffect } from 'react';
 
-// components
+//router dom
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+
+// components 
 import NavBar from './components/NavBar/NavBar';
-//spinner
-import { CircleLoader } from 'react-spinners';
+
 //redux
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+
 // auth checker component
 import Auth from './components/Auth';
+
+//spinnger 
+import Spinner from './components/Spinner/Spinner';
+
+//function
+import { checkAuthToken } from './redux/authReducer/actions';
+
 
 const Home = lazy(() => import('./pages/Home'));
 const LoginPage = lazy(() => import('./pages/LoginPage'));
@@ -16,21 +25,26 @@ const Cart = lazy(() => import('./pages/Cart'));
 const Products = lazy(() => import('./pages/Products'));
 
 function App() {
-  const { loading } = useSelector((state) => state.authReducer);
 
-  if (loading)
-    return (
-      <div className="spinner-container">
-        <CircleLoader color="#ff8500" loading={true} size={90} />;
-        <h3>Loading ...</h3>
-      </div>
-    );
+  const { isAuth, loading} = useSelector((state) => state.authReducer);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(checkAuthToken(isAuth));
+    console.log('check done');
+    <Navigate to={'/login'}/>
+  },[isAuth])
+
+  console.log(loading);
+
+  if (loading) return <Spinner />;
+
 
   return (
     <div className="App">
       <BrowserRouter>
         <NavBar />
-          <Suspense fallback={'Loading ...'}>
+          <Suspense fallback={<Spinner />}>
             <Routes>
               <Route path="/" element={<Auth><Home /></Auth>} />
               <Route path="login" element={<LoginPage />} />
