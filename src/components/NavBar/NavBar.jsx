@@ -1,12 +1,21 @@
-import { Link } from 'react-router-dom';
+//styles
 import styles from './style.module.css';
-import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+//router dom
+import { useNavigate,Link } from 'react-router-dom';
+//redux
+import { useSelector, useDispatch } from 'react-redux';
+// action
+import { logout } from '../../redux/authReducer/actions';
 
 function NavBar() {
-  const { isAuth, loading, user } = useSelector((state) => state.authReducer);
 
+  const { isAuth, loading, user } = useSelector((state) => state.authReducer);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  function handleLogout(){
+    dispatch(logout());
+  }
 
   return (
     <nav className={styles.nav}>
@@ -16,7 +25,7 @@ function NavBar() {
 
       <div className="button">
         {isAuth ? (
-          ''
+          <button onClick={handleLogout}>Logout</button>
         ) : (
           <button onClick={() => navigate('/login')}>Login</button>
         )}

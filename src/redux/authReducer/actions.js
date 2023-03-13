@@ -2,11 +2,11 @@ import magic from "../../services/magic"
 import * as AUTH_CONSTANTS from './constants'
 
 export function HandleLogin(email) {
-    
+
     return async (dispatch) => {
 
         dispatch({
-            type: AUTH_CONSTANTS.LOGIN_START
+            type: AUTH_CONSTANTS.LOADING_START
         })
 
         try {
@@ -20,7 +20,7 @@ export function HandleLogin(email) {
                 localStorage.setItem('Token', Token);
                 dispatch({
                     type: AUTH_CONSTANTS.AUTH_SUCCESS,
-                    payload: {user, Token}
+                    payload: { user, Token }
                 })
             }
         } catch (error) {
@@ -30,4 +30,23 @@ export function HandleLogin(email) {
             })
         }
     }
+}
+
+
+export const logout = () => (dispatch) => {
+
+    dispatch({type: AUTH_CONSTANTS.LOADING_START})
+
+    try {
+        const resp = magic.user.logout();
+        dispatch({type: AUTH_CONSTANTS.LOGOUT_USER})
+        localStorage.clear();
+
+    } catch (error) {
+        dispatch({
+            type: AUTH_CONSTANTS.AUTH_ERROR,
+            payload: error
+        })
+    }
+
 }
