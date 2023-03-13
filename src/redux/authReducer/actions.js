@@ -1,10 +1,8 @@
 import magic from "../../services/magic"
 import * as AUTH_CONSTANTS from './constants'
-import jwt_decode from 'jwt-decode';
-
 
 export function HandleLogin(email) {
-
+    
     return async (dispatch) => {
 
         dispatch({
@@ -12,16 +10,17 @@ export function HandleLogin(email) {
         })
 
         try {
-            const response = await magic.auth.loginWithMagicLink({email})
+
+            const response = await magic.auth.loginWithMagicLink({ email })
+            const user = await magic.user.getMetadata();
             const Token = await magic.user.getIdToken();
 
-
             if (response) {
-                localStorage.setItem('user', response);
-                localStorage.setItem('Token', JSON.stringify(Token));
+                localStorage.setItem('user', JSON.stringify(user));
+                localStorage.setItem('Token', Token);
                 dispatch({
                     type: AUTH_CONSTANTS.AUTH_SUCCESS,
-                    payload: response
+                    payload: {user, Token}
                 })
             }
         } catch (error) {

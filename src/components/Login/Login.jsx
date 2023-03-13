@@ -1,11 +1,18 @@
 import { useState } from 'react';
 import styles from './style.module.css';
-import { useDispatch } from 'react-redux';
+
+//redux
+import { useDispatch, useSelector } from 'react-redux';
+
+//action
 import { HandleLogin } from '../../redux/authReducer/actions';
+
+//router dom
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+
+
 function Login() {
-  const { isAuth, loading, user } = useSelector((state) => state.authReducer);
+  const { isAuth, loading} = useSelector((state) => state.authReducer);
   const [userEmail, setUserEmail] = useState('');
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -16,7 +23,7 @@ function Login() {
   }
 
   return loading ? (
-    'loading ...'
+    <CircleLoader />
   ) : (
     <div className={styles.loginContainer}>
       <div>
@@ -29,7 +36,9 @@ function Login() {
       </div>
 
       <div>
-        <button onClick={login}>Login</button>
+        <button disabled={isAuth} onClick={login}>
+          Login
+        </button>
       </div>
     </div>
   );
