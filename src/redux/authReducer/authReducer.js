@@ -20,7 +20,7 @@ const authReducer = (state = initState, action) => {
         case AUTH_CONSTANTS.AUTH_SUCCESS:
             return {
                 ...state,
-                isAuth: action.payload.Token,
+                isAuth: true,
                 loading: false,
                 user: action.payload.user
             }
@@ -39,6 +39,17 @@ const authReducer = (state = initState, action) => {
                 user: {},
                 error: null
             }
+        case AUTH_CONSTANTS.RESET_VALIDATE_ACTION:
+            return {
+                ...state,
+                loading: false,
+                isAuth: false,
+            }
+
+            case AUTH_CONSTANTS.LOADING_END:
+                return {
+                    ...state, loading: false
+                }
         default:
             return state
 

@@ -10,42 +10,74 @@ export function HandleLogin(email) {
         })
 
         try {
-
             const response = await magic.auth.loginWithMagicLink({ email })
             const user = await magic.user.getMetadata();
             const Token = await magic.user.getIdToken();
 
-            if (response) {
-                localStorage.setItem('user', JSON.stringify(user));
-                localStorage.setItem('Token', Token);
-                dispatch({
-                    type: AUTH_CONSTANTS.AUTH_SUCCESS,
-                    payload: { user, Token }
-                })
-            }
+            // if (response) {
+            localStorage.setItem('user', JSON.stringify(user));
+            localStorage.setItem('Token', Token);
+            dispatch({
+                type: AUTH_CONSTANTS.AUTH_SUCCESS,
+                payload: { user, Token }
+            })
+            // }
+            return true;
+
         } catch (error) {
             dispatch({
                 type: AUTH_CONSTANTS.AUTH_ERROR,
                 payload: error
             })
+            return false;
         }
     }
 }
 
 
-export const logout = () => (dispatch) => {
+export const logout = () => async (dispatch) => {
 
-    dispatch({type: AUTH_CONSTANTS.LOADING_START})
+    dispatch({ type: AUTH_CONSTANTS.LOADING_START })
 
     try {
-        const resp = magic.user.logout();
-        dispatch({type: AUTH_CONSTANTS.LOGOUT_USER})
+        await magic.user.logout();
+        dispatch({ type: AUTH_CONSTANTS.LOGOUT_USER })
         localStorage.clear();
 
     } catch (error) {
         dispatch({
             type: AUTH_CONSTANTS.AUTH_ERROR,
             payload: error
+        })
+    }
+
+}
+
+
+export const checkAuthToken = () => async (dispatch) => {
+
+    dispatch({
+        type: AUTH_CONSTANTS.LOADING_START
+    })
+
+    try {
+        const isLoggedIn = await magic.user.isLoggedIn();
+
+        if(isLoggedIn){
+            console.log('authorized');
+            dispatch({
+                type: AUTH_CONSTANTS.LOADING_END
+            })
+        }else{
+            console.log('NOT authorized');
+            dispatch({
+                type:AUTH_CONSTANTS.RESET_VALIDATE_ACTION,
+            })
+        }
+    } catch (error) {
+        console.log('you are not authorized');
+        dispatch({
+            type: AUTH_CONSTANTS.RESET_VALIDATE_ACTION,
         })
     }
 
