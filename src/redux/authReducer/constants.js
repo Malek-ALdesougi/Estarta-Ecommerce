@@ -3,3 +3,4 @@ export const AUTH_SUCCESS = 'AUTH_SUCCESS';
 export const AUTH_ERROR = 'AUTH_ERROR';
 export const LOGOUT_USER = 'LOGOUT_USER';
 export const RESET_VALIDATE_ACTION = 'RESET_VALIDATE_ACTION'
+export const LOADING_END = 'LOADING_END'

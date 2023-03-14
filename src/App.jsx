@@ -35,7 +35,9 @@ function App() {
     <Navigate to={'/login'}/>
   },[isAuth])
 
-  console.log(loading);
+  console.log('is Auth :' + isAuth);
+
+  console.log('loading : ' + loading);
 
   if (loading) return <Spinner />;
 

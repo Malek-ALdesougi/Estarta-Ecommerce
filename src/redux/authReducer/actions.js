@@ -14,14 +14,14 @@ export function HandleLogin(email) {
             const user = await magic.user.getMetadata();
             const Token = await magic.user.getIdToken();
 
-            if (response) {
-                localStorage.setItem('user', JSON.stringify(user));
-                localStorage.setItem('Token', Token);
-                dispatch({
-                    type: AUTH_CONSTANTS.AUTH_SUCCESS,
-                    payload: { user, Token }
-                })
-            }
+            // if (response) {
+            localStorage.setItem('user', JSON.stringify(user));
+            localStorage.setItem('Token', Token);
+            dispatch({
+                type: AUTH_CONSTANTS.AUTH_SUCCESS,
+                payload: { user, Token }
+            })
+            // }
             return true;
 
         } catch (error) {
@@ -35,12 +35,12 @@ export function HandleLogin(email) {
 }
 
 
-export const logout = () => (dispatch) => {
+export const logout = () => async (dispatch) => {
 
     dispatch({ type: AUTH_CONSTANTS.LOADING_START })
 
     try {
-        const resp = magic.user.logout();
+        await magic.user.logout();
         dispatch({ type: AUTH_CONSTANTS.LOGOUT_USER })
         localStorage.clear();
 
@@ -54,8 +54,7 @@ export const logout = () => (dispatch) => {
 }
 
 
-
-export const checkAuthToken = (isAuth) => async (dispatch) => {
+export const checkAuthToken = () => async (dispatch) => {
 
     dispatch({
         type: AUTH_CONSTANTS.LOADING_START
@@ -64,23 +63,22 @@ export const checkAuthToken = (isAuth) => async (dispatch) => {
     try {
         const isLoggedIn = await magic.user.isLoggedIn();
 
-        if (!isLoggedIn) {
-            console.log(' not logged in');
+        if(isLoggedIn){
+            console.log('authorized');
             dispatch({
-                type: AUTH_CONSTANTS.RESET_VALIDATE_ACTION,
+                type: AUTH_CONSTANTS.LOADING_END
             })
-            localStorage.clear();
-            
-        } else {
-            console.log('logged in');
+        }else{
+            console.log('NOT authorized');
+            dispatch({
+                type:AUTH_CONSTANTS.RESET_VALIDATE_ACTION,
+            })
         }
     } catch (error) {
-
-        console.log('NOT logged in');
-        const localToken = localStorage.getItem('Token');
-        console.log(isAuth === localToken);
-        console.log('not Authorized');
-        return false;
+        console.log('you are not authorized');
+        dispatch({
+            type: AUTH_CONSTANTS.RESET_VALIDATE_ACTION,
+        })
     }
 
 }

@@ -17,6 +17,7 @@ function NavBar() {
     dispatch(logout());
   }
 
+  console.log(isAuth);
   return (
     <nav className={styles.nav}>
       <div className={styles.logo}>

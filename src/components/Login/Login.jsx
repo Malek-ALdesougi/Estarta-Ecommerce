@@ -14,23 +14,23 @@ import { Navigate, useNavigate } from 'react-router-dom';
 import Spinner from '../Spinner/Spinner';
 
 function Login() {
-  const { loading } = useSelector((state) => state.authReducer);
+  const { isAuth, loading } = useSelector((state) => state.authReducer);
   const [userEmail, setUserEmail] = useState('');
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   function login() {
     dispatch(HandleLogin(userEmail)).then((response) => {
-      console.log(response);
+      console.log('returning response to login page :' + response);
       if (response) {
-        // return navigate('/');
+        console.log('log after login');
+        navigate('/', {replace: true})
       }
     });
+    
   }
+  if(loading) return <Spinner />
 
-  console.log(loading);
-  if(loading) return <Spinner />;
-  
   return (
     <div className={styles.loginContainer}>
       <div>
@@ -43,7 +43,7 @@ function Login() {
       </div>
 
       <div>
-        <button onClick={login}>Login</button>
+        <button disabled={isAuth} onClick={login}>Login</button>
       </div>
     </div>
   );
