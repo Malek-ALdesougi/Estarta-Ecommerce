@@ -1,5 +1,5 @@
-.nav{
-    display:flex;
+.nav {
+    display: flex;
     justify-content: space-around;
     align-items: center;
     width: 100%;
@@ -7,6 +7,36 @@
     padding: 20px;
 }
 
-.logo{
-    color:white;
+.logo {
+    color: white;
+}
+
+.userOptionsContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.optionsDiv {
+    background-color: rgb(80, 79, 79);
+    position: absolute;
+    left: 30px;
+    top: 30px;
+    width: auto;
+    border-radius: 10px;
+    padding: 4px;
+    text-align: center;
+}
+
+.icon:hover {
+    cursor: pointer;
+}
+
+.icon {
+    color: darkorange
+}
+
+p {
+    color: darkorange
 }

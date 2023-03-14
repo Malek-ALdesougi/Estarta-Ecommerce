@@ -35,12 +35,7 @@ function App() {
     <Navigate to={'/login'}/>
   },[isAuth])
 
-  console.log('is Auth :' + isAuth);
-
-  console.log('loading : ' + loading);
-
   if (loading) return <Spinner />;
-
 
   return (
     <div className="App">
@@ -52,6 +47,7 @@ function App() {
               <Route path="login" element={<LoginPage />} />
               <Route path="cart" element={<Auth><Cart /></Auth>} />
               <Route path="products" element={<Auth><Products /></Auth>} />
+              {/* <Route path='*' element={<NotFound />} ></Route> */}
             </Routes>
           </Suspense>
       </BrowserRouter>

@@ -14,14 +14,12 @@ export function HandleLogin(email) {
             const user = await magic.user.getMetadata();
             const Token = await magic.user.getIdToken();
 
-            // if (response) {
             localStorage.setItem('user', JSON.stringify(user));
             localStorage.setItem('Token', Token);
             dispatch({
                 type: AUTH_CONSTANTS.AUTH_SUCCESS,
                 payload: { user, Token }
             })
-            // }
             return true;
 
         } catch (error) {
@@ -63,15 +61,15 @@ export const checkAuthToken = () => async (dispatch) => {
     try {
         const isLoggedIn = await magic.user.isLoggedIn();
 
-        if(isLoggedIn){
+        if (isLoggedIn) {
             console.log('authorized');
             dispatch({
                 type: AUTH_CONSTANTS.LOADING_END
             })
-        }else{
+        } else {
             console.log('NOT authorized');
             dispatch({
-                type:AUTH_CONSTANTS.RESET_VALIDATE_ACTION,
+                type: AUTH_CONSTANTS.RESET_VALIDATE_ACTION,
             })
         }
     } catch (error) {
