@@ -1,3 +1,13 @@
 {
-    "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+    "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }],
+
+
+    "root": "build",
+    "routes": [
+      { "src": "/.*", "dest": "/index.html" }
+    ],
+    "files": [
+      "public",
+      "src"
+    ]
 }
