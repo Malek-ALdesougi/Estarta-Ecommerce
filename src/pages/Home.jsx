@@ -1,9 +1,9 @@
-
 function Home() {
-
-    return(<>
-        <h2>Home page</h2>
-    </>) ;
+  return (
+    <div className='home-div'>
+      <h2>Home page</h2>
+    </div>
+  );
 }
 
 export default Home;
