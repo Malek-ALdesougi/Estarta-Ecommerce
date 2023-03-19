@@ -22,7 +22,7 @@ import { checkAuthToken } from './redux/authReducer/actions';
 const Home = lazy(() => import('./pages/Home'));
 const LoginPage = lazy(() => import('./pages/LoginPage'));
 const Cart = lazy(() => import('./pages/Cart'));
-const Products = lazy(() => import('./pages/Products'));
+const Products = lazy(() => import('./pages/ProductsPage'));
 
 function App() {
 
