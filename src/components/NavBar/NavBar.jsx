@@ -1,7 +1,7 @@
 //styles
 import styles from './style.module.css';
 //router dom
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link, NavLink } from 'react-router-dom';
 //redux
 import { useSelector, useDispatch } from 'react-redux';
 // action
@@ -20,8 +20,8 @@ function NavBar() {
     dispatch(logout());
   }
 
-  function handleOpenIcon(){
-    setIsOpen(!isOpen)
+  function handleOpenIcon() {
+    setIsOpen(!isOpen);
   }
 
   return (
@@ -33,13 +33,22 @@ function NavBar() {
       <div className="button">
         {isAuth ? (
           <div className={styles.userOptionsContainer}>
-            <FaUserAlt onClick={handleOpenIcon} className={styles.icon} color="orange" size={20} />
-            {isOpen ? 
-            <div className={styles.optionsDiv}>
-              <p>{user.email}</p>
-              <button onClick={handleLogout}>Logout</button>
-            </div>
-            : ''}
+            <NavLink to={'/'}>Home</NavLink>
+            <NavLink to={'/products'}>Products</NavLink>
+            <FaUserAlt
+              onClick={handleOpenIcon}
+              className={styles.icon}
+              color="orange"
+              size={20}
+            />
+            {isOpen ? (
+              <div className={styles.optionsDiv}>
+                <p>{user.email}</p>
+                <button onClick={handleLogout}>Logout</button>
+              </div>
+            ) : (
+              ''
+            )}
           </div>
         ) : (
           <button onClick={() => navigate('/login')}>Login</button>

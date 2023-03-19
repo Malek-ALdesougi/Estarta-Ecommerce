@@ -14,8 +14,10 @@
 .userOptionsContainer {
     display: flex;
     justify-content: center;
+    column-gap: 15px;
     align-items: center;
     position: relative;
+    
 }
 
 .optionsDiv {
@@ -40,3 +42,4 @@
 p {
     color: darkorange
 }
+
