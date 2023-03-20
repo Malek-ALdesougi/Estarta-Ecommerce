@@ -1,9 +1,8 @@
-import Products from "../components/Products/products";
-
+import Products from "../components/Products/Products";
 
 function ProductsPage() {
 
     return <Products /> ;
 }
 
-export default Products;
+export default ProductsPage;
