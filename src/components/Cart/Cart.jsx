@@ -7,8 +7,9 @@ function Cart() {
   const { cartProducts } = useSelector((state) => state.cartReducer);
   const dispatch = useDispatch();
 
+  const totalPrice = cartProducts.reduce((accumelator, current) => accumelator + current.quantity * current.price, 0);
 
-  function handleDecreaseQuantity(product){
+  function handleDecreaseQuantity(product) {
     dispatch(removeFromCart(product));
   }
 
@@ -17,6 +18,7 @@ function Cart() {
   }
   return (
     <div className={styles.cartItemContainer}>
+      <div className={styles.total}><p>Total Price : {totalPrice}$</p></div>
       {cartProducts?.map((product) => {
         return (
           <div key={product?.id} className={styles.productCard}>
@@ -24,7 +26,7 @@ function Cart() {
             <p>{product?.name}</p>
             <div className={styles.quantityDiv}>
               <button onClick={() => handleIcreaseQuantitiy(product)}>+</button>
-              <input type={'text'} placeholder={product?.quantity}/>
+              <input type={'text'} placeholder={product?.quantity} />
               <button onClick={() => handleDecreaseQuantity(product)}>-</button>
             </div>
           </div>

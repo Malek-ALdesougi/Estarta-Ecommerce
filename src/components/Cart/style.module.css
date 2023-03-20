@@ -43,3 +43,10 @@
     border-radius: 5px !important;
 
 }
+
+.total{
+    width:100%;
+    display:flex;
+    justify-content: center;
+    height: 50px;
+}
