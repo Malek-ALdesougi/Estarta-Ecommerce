@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchProducts } from '../../redux/productsReducer/actions';
 import { useEffect } from 'react';
 import styles from './style.module.css';
+import Spinner from '../Spinner/Spinner';
 
 //component
 import SingleProduct from '../singleProduct/singleProduct';
@@ -12,8 +13,12 @@ function Products() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchProducts());
+    if (products.length == 0) {
+      dispatch(fetchProducts());
+    }
   }, []);
+
+  if (loading) return <Spinner />;
 
   return (
     <>

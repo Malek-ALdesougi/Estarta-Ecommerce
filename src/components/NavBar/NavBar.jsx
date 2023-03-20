@@ -8,10 +8,14 @@ import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../../redux/authReducer/actions';
 //icons
 import { FaUserAlt } from 'react-icons/fa';
+import { IoCart } from "react-icons/io5";
+// Hooks
 import { useState } from 'react';
 
 function NavBar() {
-  const { isAuth, loading, user } = useSelector((state) => state.authReducer);
+  const { isAuth, user } = useSelector((state) => state.authReducer);
+  const {cartProducts} = useSelector(state => state.cartReducer);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
@@ -35,6 +39,10 @@ function NavBar() {
           <div className={styles.userOptionsContainer}>
             <NavLink to={'/'}>Home</NavLink>
             <NavLink to={'/products'}>Products</NavLink>
+            <Link to={'/cart'}>
+              <IoCart className={styles.cartIcon} size={25} color={'darkorange'}/>
+              <span className={styles.iconNumber}>{cartProducts.length}</span>
+              </Link>
             <FaUserAlt
               onClick={handleOpenIcon}
               className={styles.icon}
