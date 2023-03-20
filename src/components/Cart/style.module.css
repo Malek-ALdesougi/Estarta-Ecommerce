@@ -1,0 +1,45 @@
+.cartItemContainer{
+    display:flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.productCard{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.productCard p {
+    color:white;
+}
+
+.productCard input {
+    text-align: center;
+    width:50px;
+    height: 20px;
+    border-radius: 5px;
+    outline: none;
+    padding:5px;
+    background-color: darkorange;
+    color:black;
+}
+
+.quantityDiv{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.quantityDiv button {
+    height: 32px;
+    width:20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px !important;
+
+}
