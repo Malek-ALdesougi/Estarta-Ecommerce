@@ -3,6 +3,8 @@
     flex-wrap: wrap;
     gap: 15px;
     margin-top: 30px;
+    justify-content: center;
+    column-gap: 30px;
 }
 
 .productCard{
@@ -10,6 +12,10 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    border: 2px solid white;
+    border-radius:16px;
+    padding: 20px;
+    background-color: darkorange;
 }
 
 .productCard p {
@@ -49,4 +55,10 @@
     display:flex;
     justify-content: center;
     height: 50px;
+}
+
+.emptyText{
+    font-size: 70px;
+    text-align: center;
+
 }

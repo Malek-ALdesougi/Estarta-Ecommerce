@@ -19,7 +19,7 @@ function Cart() {
   return (
     <div className={styles.cartItemContainer}>
       <div className={styles.total}><p>Total Price : {totalPrice}$</p></div>
-      {cartProducts?.map((product) => {
+      {cartProducts.length !== 0 ? cartProducts.map((product) => {
         return (
           <div key={product?.id} className={styles.productCard}>
             <img src={product?.image_link} alt="image" />
@@ -31,7 +31,8 @@ function Cart() {
             </div>
           </div>
         );
-      })}
+      }
+      ) : <p className={styles.emptyText}>Your Cart Is Empty Now</p>}
     </div>
   );
 }

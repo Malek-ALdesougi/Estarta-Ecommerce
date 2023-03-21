@@ -3,6 +3,7 @@ import { addToCart } from '../../redux/cartReducer/actions';
 import { useDispatch } from 'react-redux';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import sound from '../../assets/success-1-6297.mp3';
 
 function SingleProduct({ products }) {
   const dispatch = useDispatch();
@@ -21,6 +22,12 @@ function SingleProduct({ products }) {
   function handleAddToCart(item) {
     dispatch(addToCart(item));
     notify();
+    alert('Please Turn On Your Speakers');
+    playSound();
+  }
+
+  function playSound() {
+    const audio = new Audio(sound).play();
   }
 
   return (
@@ -37,11 +44,10 @@ function SingleProduct({ products }) {
         pauseOnHover
         theme="dark"
       />
+      <ToastContainer />
       {products?.map((item) => {
         return (
           <div key={item?.id} className={styles.details}>
-            {/* Same as */}
-            <ToastContainer />
             <img src={item?.image_link} alt="" />
             <p>{item?.name}</p>
             <p>{item?.price}$</p>
